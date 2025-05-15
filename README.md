@@ -2,6 +2,13 @@
 
 This project, built with [p5.js](https://p5js.org/), is an interactive visualizer for exploring the hierarchical structure of a book described in a JSON format. Users can navigate through chapters and paragraphs by expanding or collapsing nodes with a click.
 
+## 🚀 Try It
+
+👉 [Open the Live Demo](https://adebiasi.github.io/HierarchicalReading/)
+
+You can explore a sample book structure directly in your browser. Click on titles to expand or collapse sections and interact with the hierarchy visually.
+
+
 ## ✨ Features
 
 - Tree-like visualization of book contents (titles, chapters, paragraphs)
