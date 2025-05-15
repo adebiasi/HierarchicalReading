@@ -10,9 +10,11 @@ const width = 800;
 
 const widthLimit = width - 20;
 
+const textDim = 16;
+
 function setup() {
     createCanvas(width, 1200);
-    textSize(16);
+    textSize(textDim);
     textAlign(LEFT, TOP);
     buildNodes(saggio, 0, null);
     nodes[0].visible = true;
@@ -22,11 +24,9 @@ function setup() {
 function draw() {
     background(255);
     let y = 20;
+    textFont('Courier'); // font di sistema, monospace
 
     function drawText(content, node) {
-
-        console.log(mouseY)
-
 
         // Conta quante righe verranno visualizzate
         let words = content.split(' ');
@@ -53,6 +53,14 @@ function draw() {
         }
         text(content, 20, y, widthLimit);  // 760 = larghezza massima
 
+        let primoCarattere = content.charAt(0);
+        let larghezza = textWidth(primoCarattere);
+
+        // Copre il primo carattere
+        fill(255); // stesso colore dello sfondo
+        noStroke();
+        rect(20, y, larghezza, textDim);
+
         y += node.h + 4;
 
         textStyle(NORMAL);
@@ -63,15 +71,20 @@ function draw() {
             fill(0);
             node.y = y;
             node.h = 0;
-            let indent = '-' + '      '.repeat(node.depth);
+            let indent = '   '.repeat(node.depth);
             if (node.titolo) {
-                let content = `${indent} ${node.titolo}`;
+                let content
                 if (!node.expanded) {
-                    content += `: ${node.riassunto}`
+                    content = `${indent} <${node.titolo}`;
+                    content += `: ${node.riassunto}>`
+                } else {
+                    content = `${indent} ${node.titolo}`;
                 }
+                content = '*' + content
                 drawText(content, node);
             } else {
                 let content = `${indent} ${node.riassunto}`
+                content = '*' + content
                 drawText(content, node);
             }
             // if (!node.expanded) {
